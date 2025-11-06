@@ -14,6 +14,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          outlineBorder: BorderSide(color: Color.fromRGBO(210, 210, 210, 1)),
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(20),
+          //   borderSide: BorderSide(color: Colors.green),
+          // ),
+          // focusedBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(20),
+          //   borderSide: BorderSide(color: Colors.green)),
+          // enabledBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(20),
+          //   borderSide: BorderSide(color: Colors.green),
+          // )
+        )
+      ),
       debugShowCheckedModeBanner: false,
       home: Home(
 

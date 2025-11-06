@@ -9,6 +9,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final fieldBorderStyle = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(20),
+    borderSide: BorderSide(color: Color.fromRGBO(210, 210, 210, 1), width: 2),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,23 +28,75 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Text("Hi, David ", style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w600)),
+                          Text(
+                            "Hi, David ",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           Container(
-                              margin: EdgeInsets.only(bottom: 9),
-                              child: Image.asset("assets/images/waving-hand.png", height: 40,))
+                            margin: EdgeInsets.only(bottom: 9),
+                            child: Image.asset(
+                              "assets/images/waving-hand.png",
+                              height: 40,
+                            ),
+                          ),
                         ],
                       ),
-                      Text("Explore the world", style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w500, letterSpacing: .5, color: Color.fromRGBO(136, 136, 136, 1)),),
+                      Text(
+                        "Explore the world",
+                        style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: .5,
+                          color: Color.fromRGBO(136, 136, 136, 1),
+                        ),
+                      ),
                     ],
                   ),
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset("assets/images/person_image.png", height: 60,))
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image.asset(
+                      "assets/images/person_image.png",
+                      height: 50,
+                    ),
+                  ),
                 ],
-              )
+              ),
+              SizedBox(height: 40),
+              TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical:15, horizontal: 25),
+                  hintText: "Search places",
+                  hintStyle: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: Color.fromRGBO(136, 136, 135, 1),
+                  ),
+                  enabledBorder: fieldBorderStyle,
+                  focusedBorder: fieldBorderStyle,
+                  suffixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+
+                    children: [
+                      Container(
+                        color: Color.fromRGBO(210, 210, 210, 1),
+                        width: 2,
+                        height: 35,
+                      ),
+                      SizedBox(width: 20),
+                      Image.asset("assets/images/icon setting.png"),
+                      SizedBox(width: 15),
+                    ],
+                  )
+                ),
+              ),
             ],
           ),
         ),
