@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_b3/widgets/ui_btm_bar.dart';
+import 'package:flutter_b3/widgets/ui_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -13,6 +15,10 @@ class _HomeState extends State<Home> {
     borderRadius: BorderRadius.circular(20),
     borderSide: BorderSide(color: Color.fromRGBO(210, 210, 210, 1), width: 2),
   );
+
+  int highLightedTabIndex = 0;
+
+  final tabTexts = ["Most Viewed","Nearby","Latest"];
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +77,10 @@ class _HomeState extends State<Home> {
               SizedBox(height: 40),
               TextField(
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical:15, horizontal: 25),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 25,
+                  ),
                   hintText: "Search places",
                   hintStyle: GoogleFonts.roboto(
                     fontWeight: FontWeight.w500,
@@ -83,7 +92,6 @@ class _HomeState extends State<Home> {
                   suffixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
-
                     children: [
                       Container(
                         color: Color.fromRGBO(210, 210, 210, 1),
@@ -94,13 +102,55 @@ class _HomeState extends State<Home> {
                       Image.asset("assets/images/icon setting.png"),
                       SizedBox(width: 15),
                     ],
-                  )
+                  ),
                 ),
+              ),
+              SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Popular places",
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    "View all",
+                    style: GoogleFonts.roboto(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(136, 136, 136, 1),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+              StatefulBuilder(
+                builder: (context, innerSetState) {
+                  void handleTap(int id) {
+                    innerSetState(() {
+                      highLightedTabIndex = id;
+                    });
+                  }
+                  return Row(
+                    spacing: 20,
+                    children: List.generate(tabTexts.length,(index)=>Expanded(
+                      child: UiTab(
+                        text: tabTexts[index],
+                        callback: () => handleTap(index),
+                        isHighLighted: highLightedTabIndex == index,
+                      ),
+                    )).toList()
+                  );
+                }
               ),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: UiBtmBar(),
     );
   }
 }
