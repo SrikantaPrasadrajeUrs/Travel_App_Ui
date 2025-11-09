@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_b3/views/places.dart';
 import 'package:flutter_b3/widgets/ui_btm_bar.dart';
 import 'package:flutter_b3/widgets/ui_tab.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,8 +49,8 @@ class _HomeState extends State<Home> {
                           Container(
                             margin: EdgeInsets.only(bottom: 9),
                             child: Image.asset(
-                              "assets/images/waving-hand.png",
-                              height: 40,
+                              "assets/images/wave.png",
+                              height: 35,
                             ),
                           ),
                         ],
@@ -146,6 +147,7 @@ class _HomeState extends State<Home> {
                   );
                 }
               ),
+              Places()
             ],
           ),
         ),

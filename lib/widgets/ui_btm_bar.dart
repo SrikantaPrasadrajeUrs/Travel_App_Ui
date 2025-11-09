@@ -15,6 +15,7 @@ class UiBtmBar extends StatelessWidget {
     return Container(
       height: 70,
       decoration: BoxDecoration(
+
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
