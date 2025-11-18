@@ -32,21 +32,19 @@ class _ImageViewState extends State<ImageView> {
         fit: StackFit.expand,
         alignment: Alignment.center,
         children: [
-          Positioned(
-            bottom: shadowOffset / 2,
-            child: Container(
-              width: widget.width * shadowScale,
-              height: widget.height * shadowScale,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: widget.isHighlighted ? 0.4 : 0.25),
-                    blurRadius: widget.isHighlighted ? 40 : 25,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
+          Container(
+            transform: Matrix4.translationValues(0, shadowOffset/2, 0),
+            width: widget.width * shadowScale,
+            height: widget.height * shadowScale,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: widget.isHighlighted ? 0.4 : 0.25),
+                  blurRadius: widget.isHighlighted ? 40 : 25,
+                  spreadRadius: 2,
+                ),
+              ],
             ),
           ),
           AnimatedContainer(
