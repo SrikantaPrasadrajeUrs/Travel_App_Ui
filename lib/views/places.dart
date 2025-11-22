@@ -35,8 +35,7 @@ class _PlacesState extends State<Places> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+    return SizedBox(
       height: 350,
       child: ValueListenableBuilder(
           valueListenable: highLightedIndex,
@@ -46,13 +45,14 @@ class _PlacesState extends State<Places> {
               scrollDirection: Axis.horizontal,
               itemCount: naturesImages.length,
               itemBuilder: (context, index){
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: AnimatedContainer(
-                    duration: Duration(seconds: 2),
-                    transform: notifier==index?Matrix4.translationValues(0, -20, 0):null,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(naturesImages[index], width: 220, height: 390, fit: BoxFit.fill),
+                return AnimatedContainer(
+                  margin: EdgeInsets.symmetric(vertical: 25),
+                  duration: Duration(milliseconds: 400),
+                  transform: notifier==index?Matrix4.translationValues(0, -20, 0):Matrix4.translationValues(0, 0, 0),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(naturesImages[index], width: 200, height: 390, fit: BoxFit.fill),
                   ),
                 );
           });

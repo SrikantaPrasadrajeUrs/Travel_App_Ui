@@ -1,0 +1,252 @@
+{
+  "places": [
+    {
+      "id": "mount_fuji",
+      "name": "Mount Fuji",
+      "country": "Japan",
+      "region": "Honshu",
+      "category": "Mountain",
+      "type": ["Nature", "Hiking"],
+      "description": {
+        "summary": "Mount Fuji is Japan’s highest peak (3,776 m) and a global icon of natural beauty.",
+        "details": [
+          {
+            "text": "The area offers mountain-hiking, lakeside views (Fuji Five Lakes region), hot-spring resorts and cultural significance.",
+            "source": "Japan Travel"
+          },
+          {
+            "text": "Highly recommended for cultural, scenic, and hiking enthusiasts.",
+            "source": "Rakuten Travel"
+          }
+        ]
+      },
+      "travel_info": {
+        "from_city": "Tokyo",
+        "distance_km": 100,
+        "approx_time_hours": 2.5,
+        "transport_modes": ["bus", "car", "train"],
+        "reference": {
+          "source": "Viator",
+          "url": "https://www.viator.com/blog/Know-Before-You-Go-Visiting-Mt-Fuji"
+        }
+      },
+      "weather": {
+        "best_months": ["November", "December", "January", "February"],
+        "average_temp_celsius": { "min": -5, "max": 15 },
+        "notes": "Colder at summit; bring warm layers.",
+        "source": "Klook Travel"
+      },
+      "pricing": {
+        "tier": "Mid to High",
+        "cost_estimate_usd": { "min": 100, "max": 400 },
+        "includes": ["transport", "guide", "mountain hut"],
+        "notes": "General access free; guided climbs and huts extra."
+      },
+      "rating": {
+        "score": 4.5,
+        "review_summary": "Almost a must-visit natural landmark, but weather and crowd constraints reduce perfection."
+      },
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg",
+        "https://cdn.gaijinpot.com/app/uploads/sites/6/2016/02/Mount-Fuji-New.jpg"
+      ],
+      "metadata": { "isFeatured": true }
+    },
+    {
+      "id": "andes_mountains",
+      "name": "Andes Mountains",
+      "country": "South America",
+      "region": "Peru–Chile–Argentina–Bolivia",
+      "category": "Mountain Range",
+      "type": ["Nature", "Adventure"],
+      "description": {
+        "summary": "The Andes form the world’s longest continental mountain range, stretching along South America’s western edge.",
+        "details": [
+          {
+            "text": "Spanning thousands of kilometers with diverse climates, ancient Inca culture, and breathtaking landscapes.",
+            "source": "Britannica"
+          },
+          {
+            "text": "Ideal for trekking, mountaineering, and nature exploration across multiple countries.",
+            "source": "Science HowStuffWorks"
+          }
+        ]
+      },
+      "travel_info": {
+        "from_city": "Cusco (Peru)",
+        "distance_km": 80,
+        "approx_time_hours": 3,
+        "transport_modes": ["car", "bus", "train"],
+        "reference": {
+          "source": "Peru for Less",
+          "url": "https://www.peruforless.com/blog/best-time-to-visit-peru"
+        }
+      },
+      "weather": {
+        "best_months": ["May", "June", "July", "August", "September", "October"],
+        "average_temp_celsius": { "min": -2, "max": 20 },
+        "notes": "Cold at altitude, warm days during dry season.",
+        "source": "Peru for Less"
+      },
+      "pricing": {
+        "tier": "Mid to High",
+        "cost_estimate_usd": { "min": 500, "max": 2000 },
+        "includes": ["guided treks", "permits", "accommodation"],
+        "notes": "Varies greatly by country and altitude region."
+      },
+      "rating": {
+        "score": 4.2,
+        "review_summary": "Vast and stunning but demanding; logistics and altitude can be challenging."
+      },
+      "images": [
+        "https://upload.wikimedia.org/wikipedia/commons/1/17/Cordillera_de_los_Andes.jpg",
+        "https://aboveusonlyskies.com/wp-content/uploads/2020/04/Andes-Mountains-South-America.webp"
+      ],
+      "metadata": { "isFeatured": true }
+    },
+    {
+      "id": "radhanagar_beach",
+      "name": "Radhanagar Beach",
+      "country": "India",
+      "region": "Havelock Island, Andaman & Nicobar",
+      "category": "Beach",
+      "type": ["Nature", "Relaxation"],
+      "description": {
+        "summary": "Radhanagar Beach is famous for its white sands, turquoise waters, and serene tropical surroundings.",
+        "details": [
+          {
+            "text": "Located on Havelock Island, this beach is rated among Asia’s best for natural beauty and calm.",
+            "source": "Wikipedia"
+          }
+        ]
+      },
+      "travel_info": {
+        "from_city": "Port Blair",
+        "distance_km": 60,
+        "approx_time_hours": 2.5,
+        "transport_modes": ["ferry", "boat"],
+        "reference": {
+          "source": "Go2Andaman",
+          "url": "https://www.go2andaman.com/places/radhanagar-beach"
+        }
+      },
+      "weather": {
+        "best_months": ["October", "November", "December", "January", "February", "March", "April", "May"],
+        "average_temp_celsius": { "min": 24, "max": 32 },
+        "notes": "Avoid June–September monsoon period.",
+        "source": "Wikipedia"
+      },
+      "pricing": {
+        "tier": "Moderate",
+        "cost_estimate_usd": { "min": 100, "max": 500 },
+        "includes": ["ferry ticket", "resort stay"],
+        "notes": "Affordable compared to global tropical resorts."
+      },
+      "rating": {
+        "score": 4.0,
+        "review_summary": "Perfect for calm scenic escapes, though slightly remote."
+      },
+      "images": [
+        "https://cdn.experienceandamans.com/images/best-beach-in-andaman-radhanagar.jpg",
+        "https://www.go2andaman.com/wp-content/uploads/2020/11/Radhanagar-Beach-Havelock-Go2andaman-01.jpg"
+      ],
+      "metadata": { "isFeatured": true }
+    },
+    {
+      "id": "anse_source_dargent",
+      "name": "Anse Source d’Argent",
+      "country": "Seychelles",
+      "region": "La Digue Island",
+      "category": "Beach",
+      "type": ["Nature", "Photography", "Relaxation"],
+      "description": {
+        "summary": "A picture-perfect beach with granite boulders, shallow lagoons, and lush vegetation in Seychelles.",
+        "details": [
+          {
+            "text": "Renowned for unique rock formations, soft sand, and calm turquoise waters.",
+            "source": "Wikipedia"
+          }
+        ]
+      },
+      "travel_info": {
+        "from_city": "Victoria (Mahé)",
+        "distance_km": 60,
+        "approx_time_hours": 1.5,
+        "transport_modes": ["ferry", "boat"],
+        "reference": {
+          "source": "Niva Bupa Travel",
+          "url": "https://www.nivabupa.com/travel-insurance-articles/best-time-and-month-to-visit-the-seychelles.html"
+        }
+      },
+      "weather": {
+        "best_months": ["April", "May", "October", "November"],
+        "average_temp_celsius": { "min": 25, "max": 30 },
+        "notes": "Year-round tropical warmth, mild trade winds.",
+        "source": "Wikipedia"
+      },
+      "pricing": {
+        "tier": "High",
+        "cost_estimate_usd": { "min": 800, "max": 2500 },
+        "includes": ["flight", "resort stay", "island transfers"],
+        "notes": "Luxury island pricing; eco-resorts dominate."
+      },
+      "rating": {
+        "score": 4.6,
+        "review_summary": "One of the most photogenic beaches globally; serene and exclusive."
+      },
+      "images": [
+        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/8f/b9/c8/anse-source-d-argent.jpg",
+        "https://seychelles-luxury-resorts.com/wp-content/uploads/2022/02/anse-source-dargent-beach-la-digue.jpg"
+      ],
+      "metadata": { "isFeatured": true }
+    },
+    {
+      "id": "whitehaven_beach",
+      "name": "Whitehaven Beach",
+      "country": "Australia",
+      "region": "Whitsunday Islands, Queensland",
+      "category": "Beach",
+      "type": ["Nature", "Marine", "Adventure"],
+      "description": {
+        "summary": "Whitehaven Beach is celebrated for its pure silica sands and turquoise waters within the Great Barrier Reef.",
+        "details": [
+          {
+            "text": "Accessible by boat or seaplane from Airlie Beach or Hamilton Island; part of Whitsunday Islands National Park.",
+            "source": "TripXL"
+          }
+        ]
+      },
+      "travel_info": {
+        "from_city": "Airlie Beach",
+        "distance_km": 30,
+        "approx_time_hours": 1.5,
+        "transport_modes": ["boat", "seaplane"],
+        "reference": {
+          "source": "Intrepid Travel",
+          "url": "https://www.intrepidtravel.com/za/australia/whitsundays/best-time-to-go-to-whitsundays"
+        }
+      },
+      "weather": {
+        "best_months": ["May", "June", "July", "August", "September", "October"],
+        "average_temp_celsius": { "min": 23, "max": 29 },
+        "notes": "Tropical climate; best during dry season.",
+        "source": "Intrepid Travel"
+      },
+      "pricing": {
+        "tier": "Mid to High",
+        "cost_estimate_usd": { "min": 200, "max": 1000 },
+        "includes": ["boat tour", "park fees"],
+        "notes": "Luxury cruises or budget day trips available."
+      },
+      "rating": {
+        "score": 4.4,
+        "review_summary": "One of the most beautiful beaches worldwide; remote but worth it."
+      },
+      "images": [
+        "https://mr-travl.com/img/BookArticles/868/whitehaven-beach-aerial.jpg",
+        "https://hamiltonisland.imgix.net/hamiltonisland/media/originals/articles/blog/whitehaven-hero.jpg"
+      ],
+      "metadata": { "isFeatured": true }
+    }
+  ]
+}
