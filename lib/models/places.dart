@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-/// Root model for a travel destination entry (e.g. Mount Fuji)
 class Place {
   final String id;
   final String name;
@@ -14,7 +11,7 @@ class Place {
   final Pricing pricing;
   final Rating rating;
   final List<String> images;
-  final Metadata metadata;
+  final MetaData metadata;
 
   const Place({
     required this.id,
@@ -32,102 +29,52 @@ class Place {
     required this.metadata,
   });
 
-  /// Factory to create from JSON (for asset import)
   factory Place.fromJson(Map<String, dynamic> json) {
     return Place(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      country: json['country'] ?? '',
-      region: json['region'] ?? '',
-      category: json['category'] ?? '',
-      type: List<String>.from(json['type'] ?? []),
-      description: Description.fromJson(json['description'] ?? {}),
-      travelInfo: TravelInfo.fromJson(json['travel_info'] ?? {}),
-      weather: Weather.fromJson(json['weather'] ?? {}),
-      pricing: Pricing.fromJson(json['pricing'] ?? {}),
-      rating: Rating.fromJson(json['rating'] ?? {}),
-      images: List<String>.from(json['images'] ?? []),
-      metadata: Metadata.fromJson(json['metadata'] ?? {}),
+      id: json['id'],
+      name: json['name'],
+      country: json['country'],
+      region: json['region'],
+      category: json['category'],
+      type: List<String>.from(json['type']),
+      description: Description.fromJson(json['description']),
+      travelInfo: TravelInfo.fromJson(json['travel_info']),
+      weather: Weather.fromJson(json['weather']),
+      pricing: Pricing.fromJson(json['pricing']),
+      rating: Rating.fromJson(json['rating']),
+      images: List<String>.from(json['images']),
+      metadata: MetaData.fromJson(json['metadata']),
     );
-  }
-
-  /// Converts model to JSON (for Firestore write)
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'country': country,
-      'region': region,
-      'category': category,
-      'type': type,
-      'description': description.toJson(),
-      'travel_info': travelInfo.toJson(),
-      'weather': weather.toJson(),
-      'pricing': pricing.toJson(),
-      'rating': rating.toJson(),
-      'images': images,
-      'metadata': metadata.toJson(),
-    };
-  }
-
-  /// Firestore converter helper
-  factory Place.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return Place.fromJson(data);
   }
 }
 
-/// Nested model for description
 class Description {
   final String summary;
-  final List<DescriptionDetail> details;
-
+  final List<Detail> details;
   const Description({required this.summary, required this.details});
 
   factory Description.fromJson(Map<String, dynamic> json) {
-    return Description(
-      summary: json['summary'] ?? '',
-      details: (json['details'] as List?)
-          ?.map((d) => DescriptionDetail.fromJson(d))
-          .toList() ??
-          [],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'summary': summary,
-      'details': details.map((d) => d.toJson()).toList(),
-    };
+    return Description(summary: json['summary'], details: List<Detail>.from(json['details'].map((detail) => Detail.fromJson(detail))));
   }
 }
 
-class DescriptionDetail {
+class Detail {
   final String text;
   final String source;
+  const Detail({required this.text, required this.source});
 
-  const DescriptionDetail({required this.text, required this.source});
 
-  factory DescriptionDetail.fromJson(Map<String, dynamic> json) {
-    return DescriptionDetail(
-      text: json['text'] ?? '',
-      source: json['source'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'text': text, 'source': source};
+  factory Detail.fromJson(Map<String,dynamic> json){
+    return Detail(text: json['text'], source: json['source']);
   }
 }
 
-/// Travel information
 class TravelInfo {
   final String fromCity;
   final double distanceKm;
   final double approxTimeHours;
   final List<String> transportModes;
-  final ReferenceInfo reference;
-
+  final Reference reference;
   const TravelInfo({
     required this.fromCity,
     required this.distanceKm,
@@ -136,47 +83,32 @@ class TravelInfo {
     required this.reference,
   });
 
-  factory TravelInfo.fromJson(Map<String, dynamic> json) {
+  factory TravelInfo.fromJson(Map<String,dynamic> json){
     return TravelInfo(
-      fromCity: json['from_city'] ?? '',
-      distanceKm: (json['distance_km'] ?? 0).toDouble(),
-      approxTimeHours: (json['approx_time_hours'] ?? 0).toDouble(),
-      transportModes: List<String>.from(json['transport_modes'] ?? []),
-      reference: ReferenceInfo.fromJson(json['reference'] ?? {}),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'from_city': fromCity,
-      'distance_km': distanceKm,
-      'approx_time_hours': approxTimeHours,
-      'transport_modes': transportModes,
-      'reference': reference.toJson(),
-    };
+        fromCity: json['from_city'],
+        distanceKm: (json['distance_km'] as num).toDouble(),
+        approxTimeHours: (json['approx_time_hours'] as num).toDouble(),
+        transportModes: List<String>.from(json['transport_modes']),
+        reference: Reference.fromJson(json['reference']));
   }
 }
 
-class ReferenceInfo {
+class Reference {
   final String source;
   final String url;
+  const Reference({required this.source, required this.url});
 
-  const ReferenceInfo({required this.source, required this.url});
-
-  factory ReferenceInfo.fromJson(Map<String, dynamic> json) {
-    return ReferenceInfo(
-      source: json['source'] ?? '',
-      url: json['url'] ?? '',
+  factory Reference.fromJson(Map<String, dynamic> json) {
+    return Reference(
+      source: json['source'],
+      url: json['url'],
     );
   }
-
-  Map<String, dynamic> toJson() => {'source': source, 'url': url};
 }
 
-/// Weather details
 class Weather {
   final List<String> bestMonths;
-  final TemperatureRange averageTempCelsius;
+  final TempRange averageTempCelsius;
   final String notes;
   final String source;
 
@@ -189,44 +121,27 @@ class Weather {
 
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
-      bestMonths: List<String>.from(json['best_months'] ?? []),
-      averageTempCelsius:
-      TemperatureRange.fromJson(json['average_temp_celsius'] ?? {}),
-      notes: json['notes'] ?? '',
-      source: json['source'] ?? '',
+      bestMonths: List<String>.from(json['best_months']),
+      averageTempCelsius: TempRange.fromJson(json['average_temp_celsius']),
+      notes: json['notes'],
+      source: json['source'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'best_months': bestMonths,
-      'average_temp_celsius': averageTempCelsius.toJson(),
-      'notes': notes,
-      'source': source,
-    };
   }
 }
 
-class TemperatureRange {
+class TempRange {
   final double min;
   final double max;
+  const TempRange({required this.max, required this.min});
 
-  const TemperatureRange({required this.min, required this.max});
-
-  factory TemperatureRange.fromJson(Map<String, dynamic> json) {
-    return TemperatureRange(
-      min: (json['min'] ?? 0).toDouble(),
-      max: (json['max'] ?? 0).toDouble(),
-    );
+  factory TempRange.fromJson(Map<String, dynamic> json) {
+    return TempRange(min: (json['min'] as num).toDouble(), max: (json['max'] as num).toDouble());
   }
-
-  Map<String, dynamic> toJson() => {'min': min, 'max': max};
 }
 
-/// Pricing info
 class Pricing {
   final String tier;
-  final CostEstimate costEstimateUsd;
+  final Range costEstimateUsd;
   final List<String> includes;
   final String notes;
 
@@ -239,68 +154,39 @@ class Pricing {
 
   factory Pricing.fromJson(Map<String, dynamic> json) {
     return Pricing(
-      tier: json['tier'] ?? '',
-      costEstimateUsd: CostEstimate.fromJson(json['cost_estimate_usd'] ?? {}),
-      includes: List<String>.from(json['includes'] ?? []),
-      notes: json['notes'] ?? '',
+      tier: json['tier'],
+      costEstimateUsd: Range.fromJson(json['cost_estimate_usd']),
+      includes: List<String>.from(json['includes']),
+      notes: json['notes'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'tier': tier,
-      'cost_estimate_usd': costEstimateUsd.toJson(),
-      'includes': includes,
-      'notes': notes,
-    };
   }
 }
 
-class CostEstimate {
+class Range {
   final double min;
   final double max;
+  const Range({required this.min, required this.max});
 
-  const CostEstimate({required this.min, required this.max});
-
-  factory CostEstimate.fromJson(Map<String, dynamic> json) {
-    return CostEstimate(
-      min: (json['min'] ?? 0).toDouble(),
-      max: (json['max'] ?? 0).toDouble(),
-    );
+  factory Range.fromJson(Map<String, dynamic> json) {
+    return Range(min: (json['min'] as num).toDouble(), max: (json['max'] as num).toDouble());
   }
-
-  Map<String, dynamic> toJson() => {'min': min, 'max': max};
 }
 
-/// Rating info
 class Rating {
   final double score;
   final String reviewSummary;
-
   const Rating({required this.score, required this.reviewSummary});
 
   factory Rating.fromJson(Map<String, dynamic> json) {
-    return Rating(
-      score: (json['score'] ?? 0).toDouble(),
-      reviewSummary: json['review_summary'] ?? '',
-    );
+    return Rating(score: json['score'], reviewSummary: json['review_summary']);
   }
-
-  Map<String, dynamic> toJson() => {
-    'score': score,
-    'review_summary': reviewSummary,
-  };
 }
 
-/// Metadata for Firestore tracking
-class Metadata {
+class MetaData {
   final bool isFeatured;
+  const MetaData({required this.isFeatured});
 
-  const Metadata({required this.isFeatured});
-
-  factory Metadata.fromJson(Map<String, dynamic> json) {
-    return Metadata(isFeatured: json['isFeatured'] ?? false);
+  factory MetaData.fromJson(Map<String, dynamic> json){
+    return MetaData(isFeatured: json['isFeatured']);
   }
-
-  Map<String, dynamic> toJson() => {'isFeatured': isFeatured};
 }

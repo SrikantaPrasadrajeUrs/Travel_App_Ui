@@ -1,18 +1,27 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_b3/models/places.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../models/places.dart';
 
 class ImageView extends StatefulWidget {
+  final bool requireBackButton;
+  final bool isHighLighted;
+  final bool requireSaveButton;
+  final bool requireRating;
+  final bool requirePrice;
+  final bool requireFavoriteButton;
   final Place place;
-  final double width;
-  final double height;
-  final bool isHighlighted;
 
   const ImageView({
     super.key,
+    required this.requireBackButton,
+    required this.isHighLighted,
+    required this.requireSaveButton,
+    required this.requireRating,
+    required this.requirePrice,
+    required this.requireFavoriteButton,
     required this.place,
-    required this.isHighlighted,
-    required this.width,
-    required this.height,
   });
 
   @override
@@ -22,51 +31,52 @@ class ImageView extends StatefulWidget {
 class _ImageViewState extends State<ImageView> {
   @override
   Widget build(BuildContext context) {
-    final double shadowScale = 0.9;
-    final double shadowOffset = widget.isHighlighted ? 18 : 12;
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      margin: EdgeInsets.all(20),
-      child: Stack(
-        fit: StackFit.expand,
-        alignment: Alignment.center,
-        children: [
-          Container(
-            transform: Matrix4.translationValues(0, shadowOffset/2, 0),
-            width: widget.width * shadowScale,
-            height: widget.height * shadowScale,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: widget.isHighlighted ? 0.4 : 0.25),
-                  blurRadius: widget.isHighlighted ? 40 : 25,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
+    return Stack(
+      children: [
+        ClipRRect(
+          key: ObjectKey(widget.place.images[0]),
+          borderRadius: BorderRadius.circular(18),
+          child: Image.network(
+            widget.place.images[1],
+            width: 200,
+            height: 390,
+            fit: BoxFit.fill,
           ),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
-            transform: Matrix4.translationValues(
-              10,
-              widget.isHighlighted ? -10 : 0,
-              0,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Image.network(
-                widget.place.images[0],
-                width: widget.isHighlighted?widget.width:widget.width*0.7,
-                height: widget.height,
-                fit: BoxFit.cover,
+        ),
+        Positioned(
+          left: 10,
+          right: 20,
+          bottom: 10,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                padding: EdgeInsets.only(left:10, top: 5, bottom: 20),
+                color: Colors.black.withValues(alpha: .3),
+                height: 65,
+                width: 170,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Mount Fuji, ", style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white)),
+                        Text("Tokyo",style: GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 12, color: Colors.white))
+                      ],
+                    ),
+                    Row(
+                        children: [
+                          Icon(Icons.location_on_outlined, color: Colors.white, size: 18,)
+                        ]
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
