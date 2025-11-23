@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_b3/constants.dart';
 import 'package:flutter_b3/models/places.dart';
 import 'package:flutter_b3/widgets/image_view.dart';
 
@@ -70,50 +71,50 @@ class _PlacesState extends State<Places> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, boxConstraints) {
-        final double maxHeight = boxConstraints.maxHeight.clamp(150, 400);
-        return SizedBox(
-          height: maxHeight,
-          child: StreamBuilder(
-            stream: fetchPlaces(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                print("${snapshot.error}, ${snapshot.stackTrace}");
-                return Image.network(
-                  "https://img.freepik.com/premium-vector/error-404-flat-style-design-vector-illustration-stock-illustration_357500-2884.jpg",
-                );
-              }
-              if (snapshot.hasData) {
-                final List<Place> places = snapshot.data!;
-                return ValueListenableBuilder(
-                  valueListenable: highLightedIndex,
-                  builder: (context, isHighlighted, _) {
-                    return ListView.builder(
-                      controller: scrollController,
-                      itemCount: places.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final Place place = places[index];
-                        return ImageView(
-                          place: place,
-                          requireBackButton: index != 0,
-                          isHighLighted: isHighlighted == index,
-                          requireSaveButton: false,
-                          requireRating: false,
-                          requirePrice: false,
-                          requireFavoriteButton: false,
-                        );
-                      },
+    return SizedBox(
+      height: 390,
+      child: StreamBuilder(
+        stream: fetchPlaces(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Image.network(Constants.errorImageUrl);
+          }
+          if (snapshot.hasData) {
+            final List<Place> places = snapshot.data!;
+            return ValueListenableBuilder(
+              valueListenable: highLightedIndex,
+              builder: (context, notifier, _) {
+                return ListView.builder(
+                  controller: scrollController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: places.length,
+                  itemBuilder: (context, index) {
+                    return AnimatedContainer(
+                      margin: EdgeInsets.symmetric(vertical: 25),
+                      duration: Duration(milliseconds: 400),
+                      transform:
+                          notifier == index
+                              ? Matrix4.translationValues(0, -20, 0)
+                              : Matrix4.translationValues(0, 0, 0),
+                      padding: const EdgeInsets.all(8.0),
+                      child: ImageView(
+                        place: places[index],
+                        isHighLighted: notifier == index,
+                        requireBackButton: false,
+                        requireFavoriteButton: false,
+                        requirePrice: false,
+                        requireRating: false,
+                        requireSaveButton: false,
+                      ),
                     );
                   },
                 );
-              }
-              return CircularProgressIndicator();
-            },
-          ),
-        );
-      },
+              },
+            );
+          }
+          return CircularProgressIndicator();
+        },
+      ),
     );
   }
 }

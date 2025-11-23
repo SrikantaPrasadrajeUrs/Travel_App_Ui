@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constants.dart';
 import '../models/places.dart';
 
 class ImageView extends StatefulWidget {
@@ -37,8 +38,16 @@ class _ImageViewState extends State<ImageView> {
           key: ObjectKey(widget.place.images[0]),
           borderRadius: BorderRadius.circular(18),
           child: Image.network(
-            widget.place.images[1],
-            width: 200,
+            errorBuilder: (context, err, st) {
+              return Image.network(
+                Constants.errorImageUrl,
+                width: 210,
+                height: 390,
+                fit: BoxFit.fill,
+              );
+            },
+            widget.place.images[0],
+            width: 210,
             height: 390,
             fit: BoxFit.fill,
           ),
@@ -52,7 +61,7 @@ class _ImageViewState extends State<ImageView> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                padding: EdgeInsets.only(left:10, top: 5, bottom: 20),
+                padding: EdgeInsets.only(left: 10, top: 5, bottom: 20),
                 color: Colors.black.withValues(alpha: .3),
                 height: 65,
                 width: 170,
@@ -61,15 +70,46 @@ class _ImageViewState extends State<ImageView> {
                   children: [
                     Row(
                       children: [
-                        Text("Mount Fuji, ", style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white)),
-                        Text("Tokyo",style: GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 12, color: Colors.white))
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: 120
+                          ),
+                          child: Text(
+                            "${widget.place.name}, ",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxWidth: 40
+                          ),
+                          child: Text(
+                            overflow: TextOverflow.ellipsis,
+                            widget.place.travelInfo.fromCity,
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
-                        children: [
-                          Icon(Icons.location_on_outlined, color: Colors.white, size: 18,)
-                        ]
-                    )
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.white,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
