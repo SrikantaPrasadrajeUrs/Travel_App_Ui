@@ -16,6 +16,8 @@ class _PlacesState extends State<Places> {
   late final List<String> naturesImages;
   late ScrollController scrollController;
   ValueNotifier<int> highLightedIndex = ValueNotifier<int>(0);
+  final cardWidth = 220;
+  late final double centerScreen;
 
   @override
   void initState() {
@@ -30,11 +32,19 @@ class _PlacesState extends State<Places> {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    centerScreen = MediaQuery.of(context).size.width/2;
+  }
+
+  // ui issue
+  // computation
+
   void findCenterImage(){
-    final currentPosition =scrollController.offset;
-    final maxScrollExtent = scrollController.position.maxScrollExtent;
-    int index = (currentPosition/maxScrollExtent*4).round();
-    highLightedIndex.value = index;
+    final centerPosition = scrollController.offset+centerScreen;
+    double index = centerPosition/cardWidth;
+    highLightedIndex.value = index.floor();
   }
 
   @override
