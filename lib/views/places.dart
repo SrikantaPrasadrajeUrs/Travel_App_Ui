@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_b3/widgets/place_view.dart';
 
 class Places extends StatefulWidget {
   const Places({super.key});
@@ -10,7 +11,6 @@ class Places extends StatefulWidget {
 
 class _PlacesState extends State<Places> {
   final placesCollection = FirebaseFirestore.instance.collection("places");
-  late final List<String> naturesImages;
   late ScrollController scrollController;
   ValueNotifier<int> highLightedIndex = ValueNotifier<int>(0);
   final cardWidth = 220;
@@ -20,12 +20,6 @@ class _PlacesState extends State<Places> {
   void initState() {
     scrollController = ScrollController();
     scrollController.addListener(findCenterImage);
-    naturesImages = [
-      "assets/images/nature1.jpeg",
-      "assets/images/nature2.jpeg",
-      "assets/images/nature3.jpeg",
-      "assets/images/nature4.png",
-    ];
     super.initState();
   }
 
@@ -76,18 +70,7 @@ class _PlacesState extends State<Places> {
                               ? Matrix4.translationValues(0, -20, 0)
                               : Matrix4.translationValues(0, 0, 0),
                       padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Image.network(
-                          errorBuilder: (context, error, stackTrace){
-                            return Image.asset(naturesImages[0]);
-                          },
-                          places[index]['images'][0],
-                          width: 200,
-                          height: 390,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
+                      child: PlaceView(place: places[index]),
                     );
                   },
                 );
