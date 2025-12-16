@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_b3/widgets/place_description.dart';
 import 'package:flutter_b3/widgets/place_view.dart';
 
 class Places extends StatefulWidget {
@@ -70,7 +71,12 @@ class _PlacesState extends State<Places> {
                               ? Matrix4.translationValues(0, -20, 0)
                               : Matrix4.translationValues(0, 0, 0),
                       padding: const EdgeInsets.all(8.0),
-                      child: PlaceView(place: places[index]),
+                      child: GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PlaceDescription(place:  places[index])));
+                          },
+                          child: PlaceView(place: places[index])
+                      ),
                     );
                   },
                 );
